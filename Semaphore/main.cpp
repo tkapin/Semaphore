@@ -43,6 +43,10 @@ ISR(PCINT0_vect) {
 
 int main(void)
 {
+	// set the clock division factor to 1 regardless of the CKDIV8 fuse,
+	// see 6.5.2 CLKPR - Clock Prescale Register
+	CLKPR = (1 << CLKPCE);
+	CLKPR = 0;
 
 	// set timer 0 to trigger TIMER0_COMPA interrupt once per 1ms
 	OCR0A = 125;
